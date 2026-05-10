@@ -7,9 +7,7 @@
     "start:authService": "npm --prefix ./authService run dev-auth-service",
     "start:professorService": "npm --prefix ./professorService run dev-professor-service",
     "start:studentService": "npm --prefix ./studentService run dev-student-service",
-    "start:courseService": "npm --prefix ./courseService run dev-course-service",
-    "start:enrollmentService": "npm --prefix ./enrollmentService run dev-enrollment-service",
-    "start:all": "concurrently --kill-others-on-fail -n authService,professorService,studentService,courseService,enrollmentService -c green,blue,magenta,cyan,yellow \"npm run start:authService\" \"npm run start:professorService\" \"npm run start:studentService\" \"npm run start:courseService\" \"npm run start:enrollmentService\""
+    "start:all": "concurrently --kill-others-on-fail -n authService,professorService,studentService -c green,blue,magenta \"npm run start:authService\" \"npm run start:professorService\" \"npm run start:studentService\""
   },
   "author": "Gunjan Kadu",
   "license": "ISC",
