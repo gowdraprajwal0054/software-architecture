@@ -14,5 +14,13 @@
   "devDependencies": {
     "concurrently": "^9.1.2",
     "nodemon": "^3.1.9"
+  },
+  "dependencies": {
+    "axios": "^1.16.1",
+    "cls-hooked": "^4.2.2",
+    "jsonwebtoken": "^9.0.3",
+    "uuid": "^8.3.2",
+    "winston": "^3.19.0",
+    "winston-elasticsearch": "^0.19.0"
   }
 }
