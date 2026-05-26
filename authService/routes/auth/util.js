@@ -34,9 +34,10 @@ const customHeaders = {
 function generateJWTWithPrivateKey(payload) {
   const token = jwt.sign(payload, privateKey, {
     algorithm: "RS256",
-    expiresIn: "1h",
     header: customHeaders,
+    expiresIn: "6h",
   });
+
   return token;
 }
 
@@ -44,16 +45,32 @@ function generateJWTWithPrivateKey(payload) {
 function verifyJWTWithPublicKey(token) {}
 
 async function fetchStudents() {
-  const response = await axios.get(STUDENT_SERVICE);
+  let token = generateJWTWithPrivateKey({
+    id: "authService",
+    roles: [ROLES.AUTH_SERVICE],
+  });
+  const response = await axios.get(`${STUDENT_SERVICE}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return response.data;
 }
-
+ 
 async function fetchProfessors() {
-  const response = await axios.get(PROFESSOR__SERVICE);
+  let token = generateJWTWithPrivateKey({
+    id: "authService",
+    roles: [ROLES.AUTH_SERVICE],
+  });
+  const response = await axios.get(PROFESSOR__SERVICE, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return response.data;
 }
 module.exports = {
-  kid,
+  kid, 
   generateJWTWithPrivateKey,
   fetchStudents,
   fetchProfessors,

@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt"); // For password hashing
+const bcrypt = require("bcryptjs"); // For password hashing
 
 // Define the Professor Schema
 const professorSchema = new mongoose.Schema({
@@ -21,7 +21,7 @@ const professorSchema = new mongoose.Schema({
     type: String,
     required: true, // Store the hashed password
   },
-},{timestamps: true});
+});
 
 // Pre-save hook to hash the password before saving
 professorSchema.pre("save", async function (next) {
