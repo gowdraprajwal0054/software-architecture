@@ -1,0 +1,806 @@
+{
+  "info": {
+    "name": "SMS Template 2 API Collection",
+    "description": "Postman collection covering Auth, Student, Professor, Course, Enrollment, and Grade microservices.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "authServiceUrl",
+      "value": "http://localhost:5001"
+    },
+    {
+      "key": "professorServiceUrl",
+      "value": "http://localhost:5002"
+    },
+    {
+      "key": "studentServiceUrl",
+      "value": "http://localhost:5003"
+    },
+    {
+      "key": "courseServiceUrl",
+      "value": "http://localhost:5004"
+    },
+    {
+      "key": "enrollmentServiceUrl",
+      "value": "http://localhost:5005"
+    },
+    {
+      "key": "gradeServiceUrl",
+      "value": "http://localhost:5006"
+    },
+    {
+      "key": "token",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Auth Service",
+      "item": [
+        {
+          "name": "Login as Student",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"student@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{authServiceUrl}}/api/login/student",
+              "host": [
+                "{{authServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "login",
+                "student"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Login as Professor",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"professor@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{authServiceUrl}}/api/login/professor",
+              "host": [
+                "{{authServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "login",
+                "professor"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Fetch JWKS",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{authServiceUrl}}/.well-known/jwks.json",
+              "host": [
+                "{{authServiceUrl}}"
+              ],
+              "path": [
+                ".well-known",
+                "jwks.json"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Student Service",
+      "item": [
+        {
+          "name": "Create Student",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Jane Doe\",\n  \"email\": \"jane.doe@example.com\",\n  \"password\": \"securePass123\"\n}"
+            },
+            "url": {
+              "raw": "{{studentServiceUrl}}/api/students",
+              "host": [
+                "{{studentServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "students"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get All Students",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{studentServiceUrl}}/api/students",
+              "host": [
+                "{{studentServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "students"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Student by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{studentServiceUrl}}/api/students/:id",
+              "host": [
+                "{{studentServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "students",
+                ":id"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Student",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Jane Doe Updated\",\n  \"email\": \"jane.updated@example.com\"\n}"
+            },
+            "url": {
+              "raw": "{{studentServiceUrl}}/api/students/:id",
+              "host": [
+                "{{studentServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "students",
+                ":id"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Student",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{studentServiceUrl}}/api/students/:id",
+              "host": [
+                "{{studentServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "students",
+                ":id"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Professor Service",
+      "item": [
+        {
+          "name": "Create Professor",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Dr. Smith\",\n  \"email\": \"dr.smith@example.com\",\n  \"phone\": \"1234567890\",\n  \"password\": \"profPass123\"\n}"
+            },
+            "url": {
+              "raw": "{{professorServiceUrl}}/api/professors",
+              "host": [
+                "{{professorServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "professors"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get All Professors",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{professorServiceUrl}}/api/professors",
+              "host": [
+                "{{professorServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "professors"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Professor by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{professorServiceUrl}}/api/professors/:id",
+              "host": [
+                "{{professorServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "professors",
+                ":id"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Professor",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Dr. Smith Updated\"\n}"
+            },
+            "url": {
+              "raw": "{{professorServiceUrl}}/api/professors/:id",
+              "host": [
+                "{{professorServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "professors",
+                ":id"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Professor",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{professorServiceUrl}}/api/professors/:id",
+              "host": [
+                "{{professorServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "professors",
+                ":id"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Course Service",
+      "item": [
+        {
+          "name": "Create Course",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Introduction to AI\",\n  \"description\": \"Basic AI concepts\",\n  \"code\": \"AI101\"\n}"
+            },
+            "url": {
+              "raw": "{{courseServiceUrl}}/api/courses",
+              "host": [
+                "{{courseServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "courses"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get All Courses",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{courseServiceUrl}}/api/courses",
+              "host": [
+                "{{courseServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "courses"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Course by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{courseServiceUrl}}/api/courses/:id",
+              "host": [
+                "{{courseServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "courses",
+                ":id"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Course",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"Updated course description\"\n}"
+            },
+            "url": {
+              "raw": "{{courseServiceUrl}}/api/courses/:id",
+              "host": [
+                "{{courseServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "courses",
+                ":id"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Course",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{courseServiceUrl}}/api/courses/:id",
+              "host": [
+                "{{courseServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "courses",
+                ":id"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Enrollment Service",
+      "item": [
+        {
+          "name": "Create Enrollment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"student\": \"<studentId>\",\n  \"course\": \"<courseId>\"\n}"
+            },
+            "url": {
+              "raw": "{{enrollmentServiceUrl}}/api/enrollments",
+              "host": [
+                "{{enrollmentServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "enrollments"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get All Enrollments",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{enrollmentServiceUrl}}/api/enrollments",
+              "host": [
+                "{{enrollmentServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "enrollments"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Enrollment by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{enrollmentServiceUrl}}/api/enrollments/:id",
+              "host": [
+                "{{enrollmentServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "enrollments",
+                ":id"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Enrollments by Student ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{enrollmentServiceUrl}}/api/enrollments/student/:id",
+              "host": [
+                "{{enrollmentServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "enrollments",
+                "student",
+                ":id"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Enrollment",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{enrollmentServiceUrl}}/api/enrollments/:id",
+              "host": [
+                "{{enrollmentServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "enrollments",
+                ":id"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Fetch Enrollment Service JWKS",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{enrollmentServiceUrl}}/.well-known/jwks.json",
+              "host": [
+                "{{enrollmentServiceUrl}}"
+              ],
+              "path": [
+                ".well-known",
+                "jwks.json"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Grade Service",
+      "item": [
+        {
+          "name": "Create Grade",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"student\": \"<studentId>\",\n  \"course\": \"<courseId>\",\n  \"grade\": \"A\",\n  \"remarks\": \"Excellent work\"\n}"
+            },
+            "url": {
+              "raw": "{{gradeServiceUrl}}/api/grades",
+              "host": [
+                "{{gradeServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "grades"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get All Grades",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{gradeServiceUrl}}/api/grades",
+              "host": [
+                "{{gradeServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "grades"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Grades by Student ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{gradeServiceUrl}}/api/grades/student/:id",
+              "host": [
+                "{{gradeServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "grades",
+                "student",
+                ":id"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Grade",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"grade\": \"A+\",\n  \"remarks\": \"Improved performance\"\n}"
+            },
+            "url": {
+              "raw": "{{gradeServiceUrl}}/api/grades/:id",
+              "host": [
+                "{{gradeServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "grades",
+                ":id"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Grade",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{gradeServiceUrl}}/api/grades/:id",
+              "host": [
+                "{{gradeServiceUrl}}"
+              ],
+              "path": [
+                "api",
+                "grades",
+                ":id"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Fetch Grade Service JWKS",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{gradeServiceUrl}}/.well-known/jwks.json",
+              "host": [
+                "{{gradeServiceUrl}}"
+              ],
+              "path": [
+                ".well-known",
+                "jwks.json"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
