@@ -11,6 +11,7 @@ const publicKeyRoute = require("./routes/auth/publicKeyRoute");
 const loginRoute = require("./routes/auth/loginRoute");
 const {correlationIdMiddleware} = require("../correlationId");
 const rateLimit = require("express-rate-limit");
+const { head } = require("../enrollmentService/routes/enrollmentRoute");
 
 const limiter = rateLimit({
   windowMs: 60 * 1000, // 60 seconds
@@ -27,13 +28,12 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(correlationIdMiddleware);
-app.use(limiter);
 
 // Public Key
 app.use("/.well-known/jwks.json", publicKeyRoute);
 
 // Routes
-app.use("/api/login", loginRoute);
+app.use("/api/login", limiter, loginRoute);
 
 // Start server
 const PORT = process.env.PORT || 5001;
